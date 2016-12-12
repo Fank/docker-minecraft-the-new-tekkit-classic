@@ -7,5 +7,5 @@ else
   JAVA_ARGS=$1
 fi;
 
-JAR='Tekkit.jar'
+JAR='forge-1.7.10-10.13.4.1558-1.7.10-universal.jar'
 java $1 -jar $JAR nogui

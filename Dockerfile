@@ -6,7 +6,7 @@ RUN apt-get upgrade -y
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:webupd8team/java
+RUN add-apt-repository -y ppa:webupd8team/java
 
 RUN apt-get update
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
@@ -15,8 +15,10 @@ RUN apt-get install -y oracle-java8-installer
 RUN apt-get install -y wget
 RUN apt-get install -y unzip
 
-RUN mkdir /minecraft
-RUN wget -O /minecraft/minecraft.jar https://s3.amazonaws.com/Minecraft.Download/versions/1.8.9/minecraft_server.1.8.9.jar
+RUN mkdir /minecraft &&\
+	wget -O /tmp/TNTCServer.zip https://ia601508.us.archive.org/29/items/TNTCServer/TNTCServer.zip &&\
+	unzip /tmp/TNTCServer.zip -d /minecraft/ &&\
+	rm /tmp/TNTCServer.zip
 
 ADD ./launch.sh /minecraft/launch.sh
 RUN chmod +x /minecraft/launch.sh
